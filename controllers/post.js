@@ -219,10 +219,10 @@ const createNewPost = async (req, res) => {
   author.karmaPoints.postKarma++;
   await author.save();
 
-  const populatedPost = await savedPost
-    .populate("author", "username")
-    .populate("subreddit", "subredditName")
-    .execPopulate();
+  const populatedPost = await savedPost.populate(
+    "author subreddit",
+    "username subredditName"
+  );
 
   res.status(201).json(populatedPost);
 };
